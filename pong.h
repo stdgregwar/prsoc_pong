@@ -7,9 +7,9 @@
 namespace pong {
 
     struct SpeedRect {
-        rect rect;
+        rect size;
         vec2 speed;
-        inline vec2 pos() 
+        inline vec2 pos() {return size.pos;}
     };
 
     class Pong {
@@ -32,7 +32,7 @@ namespace pong {
         Pong& operator<<(float dt);
     private:
         State mState;
-        Ball mBall;
+        SpeedRect mBall;
         SDL_Surface* mBackground;
     };
 
