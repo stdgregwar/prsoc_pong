@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
             //window.clear();
             SDL_FillRect(screen, NULL, 0x000000);
             po << 1.f/60; //Fixed time delta
+            screen << po;
             if(SDL_Flip(screen) == -1) break;
             SDL_Delay(1000/60);
         }

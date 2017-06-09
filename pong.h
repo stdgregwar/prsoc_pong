@@ -6,6 +6,12 @@
 
 namespace pong {
 
+    struct SpeedRect {
+        rect rect;
+        vec2 speed;
+        inline vec2 pos() 
+    };
+
     class Pong {
         struct State {
             std::function<bool(const SDL_Event& e)> onEvent;
@@ -26,7 +32,8 @@ namespace pong {
         Pong& operator<<(float dt);
     private:
         State mState;
-
+        Ball mBall;
+        SDL_Surface* mBackground;
     };
 
     inline SDL_Surface* operator<<(SDL_Surface* s, const Pong& p) {
