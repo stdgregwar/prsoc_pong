@@ -61,10 +61,14 @@ namespace pong {
         
         using KeyMap = std::map<SDLKey,std::tuple<float,Uint8>>; // <Key,<Val,Axis>>
         
-        KeyMap p1map = {{SDLK_UP,{-1,1}},{SDLK_DOWN,{1,1}},
-            {SDLK_LEFT,{-1,0}},{SDLK_RIGHT,{1,0}}};
-        KeyMap p2map = {{SDLK_w,{-1,3}},{SDLK_s,{1,3}},
-            {SDLK_a,{-1,2}},{SDLK_d,{1,2}}};
+        KeyMap p1map = {{SDLK_UP,std::tuple<float,Uint8>(-1,1)},
+			{SDLK_DOWN,std::tuple<float,Uint8>(1,1)},
+           		{SDLK_LEFT,std::tuple<float,Uint8>(-1,0)},
+			{SDLK_RIGHT,std::tuple<float,Uint8>(1,0)}};
+        KeyMap p2map = {{SDLK_w,std::tuple<float,Uint8>(-1,3)},
+			{SDLK_s,std::tuple<float,Uint8>(1,3)},
+            		{SDLK_a,std::tuple<float,Uint8>(-1,2)},
+			{SDLK_d,std::tuple<float,Uint8>(1,2)}};
         
         std::array<float,4> vJoyAxises{{0,0,0,0}};
         joysticks_dev jdev;
@@ -72,7 +76,7 @@ namespace pong {
             e.type = SDL_JOYAXISMOTION; //Transform event in joystick move
             Uint8 axis;
             float val;
-            tie(val,axis) = getOrElse(p1map,e.key.keysym.sym,getOrElse(p2map,e.key.keysym.sym,{0,5}));
+            tie(val,axis) = getOrElse(p1map,e.key.keysym.sym,getOrElse(p2map,e.key.keysym.sym,std::tuple<float,Uint8>(0,5)));
             e.jaxis.which = 0; //Always 0 for emulated joystick
             e.jaxis.axis = axis;
             if(axis > 3) return; //Don't do anything if out-of bound axis
