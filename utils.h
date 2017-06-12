@@ -9,14 +9,13 @@
 #include <stdint.h>
 #include <assert.h>
 #include <sys/mman.h>
-#ifdef DENANO
 #include <linux/fb.h>
-#endif
 #include <unistd.h>
-#include <map>
+#include <unordered_map>
 
 #include "geometry.h"
 #include "joysticks/joysticks.h"
+
 
 namespace fb {
 
@@ -39,7 +38,7 @@ namespace pong {
     using namespace std;
 
     template<class K, class V>
-    inline auto getOrElse(const map<K,V>& m,const K& key, const V& def) -> const V& {
+    inline auto getOrElse(const unordered_map<K,V>& m,const K& key, const V& def) -> const V& {
         auto it = m.find(key);
         if(it != m.end()) return it->second;
         return def;
