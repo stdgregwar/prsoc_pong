@@ -61,4 +61,11 @@ namespace pong {
         update(dt);
         return *this;
     }
+
+    inline bool SpeedRect::intersect(SpeedRect& other){
+        return this->size.contains(other.pos()) ||
+               this->size.contains(other.pos() + vec2(other.size.size.getX(), 0.0)) ||
+               this->size.contains(other.pos() + vec2(0.0,other.size.size.getY())) ||
+               this->size.contains(other.pos() + vec2(other.size.size.getX(), other.size.size.getY()));   
+    }
 }

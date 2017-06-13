@@ -11,6 +11,10 @@ namespace pong {
     template<typename T>
     struct vec2_t {
         T x,y;
+	vec2_t(){}
+	vec2_t(T tx, T ty): x(tx), y(ty){}
+	inline T getX() const {return x;}
+	inline T getY() const {return x;}
         vec2_t operator*(T s) const {return vec2_t{x*s,y*s};}
         vec2_t operator+(const vec2_t& o) const {return vec2_t{o.x+x,o.y+y};}
         vec2_t& operator+=(const vec2_t& o) {

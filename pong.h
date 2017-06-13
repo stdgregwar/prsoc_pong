@@ -10,6 +10,8 @@ namespace pong {
         rect size;
         vec2 speed;
         inline vec2 pos() {return size.pos;}
+	inline const rect getSize() const {return size;}
+        inline bool intersect(SpeedRect& other);
     };
 
     class Pong {
