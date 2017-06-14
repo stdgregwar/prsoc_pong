@@ -6,14 +6,7 @@
 
 namespace pong {
 
-    struct SpeedRect {
-        rect size;
-        vec2 speed;
-        inline vec2 pos() {return size.pos;}
-	inline const rect getSize() const {return size;}
-        inline bool intersect(SpeedRect& other);
-    };
-
+    
     class Pong {
         struct State {
             std::function<bool(const SDL_Event& e)> onEvent;

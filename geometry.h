@@ -51,4 +51,18 @@ namespace pong {
 
     typedef vec2_t<float> vec2;
     typedef rect_t<float> rect;
+
+    struct SpeedRect {
+        rect size;
+        vec2 speed;
+        inline vec2 pos() {return size.pos;}
+        inline const rect getSize() const {return size;}
+        inline bool intersect(SpeedRect& other){
+            return this->size.contains(other.pos()) ||
+                this->size.contains(other.pos() + vec2(other.size.size.getX(), 0.0)) ||
+                this->size.contains(other.pos() + vec2(0.0,other.size.size.getY())) ||
+                this->size.contains(other.pos() + vec2(other.size.size.getX(), other.size.size.getY()));   
+        }
+    };
+
 }
