@@ -11,6 +11,7 @@ using namespace pong;
 int main(int argc, char* argv[]){
     
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTTHREAD | SDL_INIT_JOYSTICK); //Init SDL
+    IMG_Init(IMG_INIT_PNG);
     SDL_Surface* screen;
     if(argc > 1 && string(argv[1]) == "fb") { //Switch to fb based hack
         screen = fb::setupFramebuffer();
