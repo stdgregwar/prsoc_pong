@@ -23,6 +23,9 @@ int main(int argc, char* argv[]){
     if(!image) throw std::runtime_error("could not load image");
     SDL_BlitSurface(image,0,screen,0);
     SDL_FreeSurface(image);
+    #ifdef DENANO
+    pong:joysticks::init(); //Init joysticks
+    #endif
     //TODO add mainloop
     {
         bool quit = false;

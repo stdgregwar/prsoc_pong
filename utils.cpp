@@ -58,7 +58,17 @@ namespace fb {
 
 namespace pong {
     namespace joysticks {
-        
+        joysticks_dev jdev;
+        constexpr void* baseLiteBusAddr = 0xFF200000;
+        constexpr size_t busSize = 1024*1024*2; //2Mo bus size
+        constexpr off_t mcpOff = 0x000000e0; //Offset of the joysticks ADC
+        void init() {
+            int mem_fd = open("/dev/mem",O_RDWR | O_SYNC);
+            void* bus = mmap(nullptr,busSize,PROT_READ|PROT_WRITE,MAP_SHARED,mem_fd,baseLiteBusAddr); //Map base bus address
+            void* mcp3204 = (uintptr_t)bus + mcpOff;
+            jdev = joysticks_inst(mcp3204);
+            joysticks_init(&jdev);
+        }
         using KeyMap = std::map<SDLKey,std::tuple<float,Uint8>>; // <Key,<Val,Axis>>
         
         KeyMap p1map = {{SDLK_UP,std::tuple<float,Uint8>(-1,1)},
@@ -71,7 +81,6 @@ namespace pong {
 			{SDLK_d,std::tuple<float,Uint8>(1,2)}};
         
         std::array<float,4> vJoyAxises{{0,0,0,0}};
-        joysticks_dev jdev;
         inline void getKeyJoyEvent(SDL_Event& e, float press) {
             e.type = SDL_JOYAXISMOTION; //Transform event in joystick move
             Uint8 axis;

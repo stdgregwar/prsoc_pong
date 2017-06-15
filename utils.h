@@ -48,6 +48,7 @@ namespace pong {
 
     namespace joysticks {
         constexpr float joyRange = 32767;
+        void init();
 
         void getKeyJoyEvent(SDL_Event& e, float press);
 
