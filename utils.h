@@ -32,6 +32,12 @@ namespace fb {
        (which it becomes in fact)
     **/
     SDL_Surface* setupFramebuffer();
+
+    /**
+       Change buffer side for the virtual screen buffer and tell actual screen to display
+       the other one
+     */
+    void swapBuffer();
 }
 
 namespace pong {

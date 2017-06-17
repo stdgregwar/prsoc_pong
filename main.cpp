@@ -24,9 +24,8 @@ int main(int argc, char* argv[]){
     SDL_BlitSurface(image,0,screen,0);
     SDL_FreeSurface(image);
     #ifdef DENANO
-    pong:joysticks::init(); //Init joysticks
+    joysticks::init(); //Init joysticks
     #endif
-    //TODO add mainloop
     {
         bool quit = false;
         Pong po;
@@ -40,7 +39,11 @@ int main(int argc, char* argv[]){
             SDL_FillRect(screen, NULL, 0x000000);
             po << 1.f/60; //Fixed time delta
             screen << po;
+            #ifndef DENANO
             if(SDL_Flip(screen) == -1) break;
+            #else
+            fb::swapBuffer();
+            #endif
             SDL_Delay(1000/60);
         }
     }

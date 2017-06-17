@@ -1,10 +1,11 @@
 LDLIBS = -lSDL -lSDL_image
-CXXFLAGS = -std=c++11 -g -Wall -pedantic
+CXXFLAGS += -DDENANO -std=c++11 -g -Wall -pedantic
 
 CPP = $(wildcard *.cpp)
-CS = $(wildcard *.c)
+CS = $(shell find . -name '*.c')
 OBJS = $(notdir $(CPP:.cpp=.o))
-OBJS += $(notdir $(CS:.c=.o))
+OBJS += $(CS:.c=.o)
+
 
 all: pong
 
@@ -18,5 +19,5 @@ runfb:
 	./pong fb
 
 clean:
-	rm -f *.o
+	find . -name '*.o' -exec rm -rf {} \;
 	rm pong

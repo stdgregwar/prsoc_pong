@@ -6,7 +6,7 @@
 
 constexpr uint32_t solidWhite = 0xffffffff;
 constexpr float padSize = 60;
-constexpr float ballSpeed = 200;
+constexpr float ballSpeed = 300;
 constexpr float bounce = -1.1f;
 
 namespace pong {
@@ -26,6 +26,7 @@ namespace pong {
     {
         //Setup background
         mBackground = SDL_CreateRGBSurface(SDL_SWSURFACE,winWidth,winHeight,32,rmask,gmask,bmask,amask);
+        //mBackground = IMG_Load("background.png");
         mNumbers = IMG_Load("numbers.png");
         if(!mNumbers) {
             throw std::runtime_error("Failed to load  numbers");
@@ -45,7 +46,7 @@ namespace pong {
 
 
     bool Pong::padMoves(const SDL_Event& e) {
-        constexpr float speedFac = 1.f/100;
+        constexpr float speedFac = 1.f/50;
         if(e.type != SDL_JOYAXISMOTION) return true;
         const SDL_JoyAxisEvent& je = (const SDL_JoyAxisEvent&)e;
         switch(je.axis) {

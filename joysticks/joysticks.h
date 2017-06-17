@@ -3,6 +3,10 @@
 
 #include "mcp3204/mcp3204.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* joysticks device structure */
 typedef struct joysticks_dev {
     mcp3204_dev mcp3204; /* MCP3204 device handle */
@@ -23,5 +27,8 @@ uint32_t joysticks_read_left_vertical(joysticks_dev *dev);
 uint32_t joysticks_read_left_horizontal(joysticks_dev *dev);
 uint32_t joysticks_read_right_vertical(joysticks_dev *dev);
 uint32_t joysticks_read_right_horizontal(joysticks_dev *dev);
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __JOYSTICKS_H__ */
